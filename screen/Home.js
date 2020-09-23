@@ -10,17 +10,17 @@ export default function Home({navigation}) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle='default' backgroundColor='darkblue'/>
+      <StatusBar barStyle='default' backgroundColor='darkblue' hidden={true}/>
       
       <TouchableOpacity style={styles.project} onPress={()=>{navigation.navigate('Project')}}>
       <Image source={require('../assets/project.png')}/>
-      <Text >Projects</Text>
+      <Text  style={styles.title}>Projects</Text>
       </TouchableOpacity>
 
   
       <TouchableOpacity style={styles.bug} onPress={()=>{navigation.navigate('Bug')}}>
       <Image source={require('../assets/bug.png')}/>
-      <Text >Bugs</Text>
+      <Text style={styles.title}>Bugs</Text>
       </TouchableOpacity>
       
       
@@ -48,8 +48,13 @@ const styles = StyleSheet.create({
   bug: {
     width:Dimensions.get('window').width,
     height:Dimensions.get('window').height/2,
-    backgroundColor: 'orange',
+    backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  title:{
+    color:'black',
+    fontSize:30,
+  }
 });
