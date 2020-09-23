@@ -3,52 +3,52 @@
       {
         "id": 1,
         "title": "Calculator",
-        "platform":"Android"
+        "platform":"android"
       },
       {
         "id": 2,
         "title": "Camera",
-        "platform":"Android"
+        "platform":"android"
       },
       {
         "id": 3,
         "title": "Mario",
-        "platform":"Linux"
+        "platform":"linux"
       },
       {
         "id": 4,
         "title": "Call of Duty",
-        "platform":"Windows"
+        "platform":"windows"
       },
       {
         "id": 5,
         "title": "Drafts 5",
-        "platform":"Apple"
+        "platform":"apple"
       },
       {
         "id": 6,
         "title": "Flow",
-        "platform":"Apple"
+        "platform":"apple"
       },
       {
         "id": 7,
         "title": "SketchPad",
-        "platform":"Android"
+        "platform":"android"
       },
       {
         "id": 8,
         "title": "BitTorrent",
-        "platform":"Windows"
+        "platform":"windows"
       },
       {
         "id": 9,
         "title": "Wine",
-        "platform":"Linux"
+        "platform":"linux"
       },
       {
         "id": 10,
         "title": "Super Tux",
-        "platform":"Linux"
+        "platform":"linux"
       }
       
     ]
