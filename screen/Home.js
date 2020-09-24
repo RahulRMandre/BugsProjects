@@ -5,13 +5,13 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
+
 export default function Home({navigation}) {
 
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle='default' backgroundColor='darkblue' hidden={true}/>
-      
+       <StatusBar  hidden={true}/>
       <TouchableOpacity style={styles.project} onPress={()=>{navigation.navigate('Project')}}>
       <Image source={require('../assets/project.png')}/>
       <Text  style={styles.title}>Projects</Text>

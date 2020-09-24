@@ -2,17 +2,10 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import StackNavigator from './route/StackNavigator.js';
-import Home from './screen/Home.js'
-import Test from './screen/Test.js';
 
 export default function App() {
   return (
-
-    
-     <StackNavigator/>
- 
-
-   
+ <StackNavigator/> 
   );
 }
 
