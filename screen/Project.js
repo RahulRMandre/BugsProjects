@@ -48,12 +48,14 @@ export default function Project() {
     renderItem={({item}) => {
       const loc=item.platform;
       return(  
-     <View style={styles.item}>
-       <View style={{flex:9,backgroundColor:'yellow'}}>
+     <View style={styles.item} >
+       <View style={{flex:9,backgroundColor:'yellow', borderRadius:10,}}>
        <Text style={styles.itemTitle}>{item.title}</Text>
        </View>
-     
-      <ImageBackground  style={styles.tinyLogo} source={image.platform[loc]}/>
+      <View style={{flex:2,backgroundColor:'green', borderRadius:10,paddingLeft:10}}>
+       <ImageBackground  style={styles.tinyLogo} source={image.platform[loc]}/>
+      </View>
+      
       </View>
     )}}/>
     ) :(
@@ -84,8 +86,9 @@ const styles = StyleSheet.create({
     marginBottom:1,
     width:Dimensions.get('window').width-20,
     height:Dimensions.get('window').height/10,
-    backgroundColor:'green',
     margin:10,
+   
+    
   
     
     
@@ -119,7 +122,7 @@ const styles = StyleSheet.create({
     overflow:'hidden',
     alignItems: 'center',
     justifyContent: 'center',
-    
+    borderRadius:10,
     
 
   },

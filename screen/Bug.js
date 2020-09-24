@@ -7,14 +7,16 @@ const db =  SQLite.openDatabase('db.bugsDb') // returns Database object
 
 
 const newItem =({setvisible,bugname,enabled}) => {
-  //console.log('new item');
+  console.log('new item');
   //console.log(bugname,enabled);
+  const time=new Date().toISOString()
+  console.log('time:',time);
   db.transaction(tx => {
     tx.executeSql(
       'INSERT INTO bugs (name, isClosed, createdAt, projectId) values (?, ?, ?, ?)', 
-      [bugname,`${enabled}`,'2020-09-12T09:41:59.460Z',1],
+      [bugname,`${enabled}`,time,1],
       (txObj, resultSet) =>{
-        console.log('success added elemnt', resultSet); 
+        console.log('success added element', resultSet); 
         },
       (txObj, error) => console.log('Error', error))
   })
@@ -68,14 +70,14 @@ export default function Bug() {
     data={state}
     renderItem={({item}) => {
       return(  
-        <View style={{flexDirection:'row', margin:10 }}>
-          <View style={{flex:9,backgroundColor:'yellow'}}>
+        <View style={{flexDirection:'row', margin:5 ,borderRadius:10,}}>
+          <View style={{flex:9,backgroundColor:'yellow',borderRadius:10, }}>
             <Text style={styles.itemTitle}>Title:{item.name}</Text>
-            <Text style={styles.itemTitle}>Open:{item.isClosed}</Text> 
+            <Text style={styles.itemTitle}>Status:{item.isClosed==='true'?('Open'):('Closed')}</Text> 
             <Text style={styles.itemBody}>timeStamp:{item.createdAt}</Text>
         </View>
 
-        <View style={{flex:2,backgroundColor:'green', justifyContent:'center' ,alignItems:'center'}}>
+        <View style={{flex:2,backgroundColor:'green', justifyContent:'center' ,alignItems:'center',borderRadius:10,}}>
         <ImageBackground  style={styles.tinyLogo} source={require('../assets/bug.png')}/>
         </View>
 
@@ -88,22 +90,28 @@ export default function Bug() {
   return (
     <View style={styles.container} >
      <StatusBar barStyle='default' backgroundColor='red' hidden={false}/>
-      <Text>Bug</Text>
+      <Text style={styles.title} >Bugs</Text>
       {dataList}
 
       <Modal style={styles.container}
-       visible={visible}>
+       visible={visible}
+       onRequestClose={() => {setvisible(false)}}>
         <Text style={styles.modalText}> Bug Title</Text>
         <TextInput style={styles.textInput} value={bugname} onChangeText={(text)=>{setbug(text)}}></TextInput>
         <Text style={styles.modalText}>Bug Closed</Text>
-        <Switch thumbColor={enabled ? "#00ff00" : "#ff0000"} 
+        <Switch thumbColor={enabled ? "green" : "red"} 
         onValueChange={()=>{setenabled(!enabled)}}
         value={enabled}></Switch>
         <View style={styles.modalButtonWrapper}>
-        <TouchableOpacity style={styles.modalButton} onPress={()=>{newItem({setvisible, bugname, enabled})}}>
+        <TouchableOpacity style={styles.modalButton} 
+        onPress={()=>{
+          newItem({setvisible, bugname, enabled})
+          setbug('');
+          setenabled(false);
+          }}>
           <Text>Submit</Text>
         </TouchableOpacity> 
-        <TouchableOpacity style={styles.modalButton} onPress={()=>{setvisible(false)}}>
+        <TouchableOpacity style={styles.modalButtonCancel} onPress={()=>{setvisible(false)}}>
           <Text>Cancel</Text>
         </TouchableOpacity>
         </View>
@@ -139,8 +147,10 @@ const styles = StyleSheet.create({
     fontSize:9,
      alignSelf:'flex-end',  
    },
- 
-
+   modalText:{
+   fontSize:18,
+   margin:10,  
+   },
    itemPlatform:{
      alignSelf:'flex-end',
    },
@@ -163,6 +173,7 @@ const styles = StyleSheet.create({
     },
 
   modalButtonWrapper:{
+    marginTop:20,
     flexDirection:'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -173,6 +184,15 @@ const styles = StyleSheet.create({
     height:40,
     width:Dimensions.get('window').width/2-20,
     backgroundColor:'green',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  modalButtonCancel:{
+    margin:10,
+    height:40,
+    width:Dimensions.get('window').width/2-20,
+    backgroundColor:'red',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -187,5 +207,12 @@ const styles = StyleSheet.create({
   item:{
     width:Dimensions.get('window').width,
     
+  },
+  title:{
+    marginTop:Dimensions.get('window').height/20,
+    color:'black',
+    fontSize:30,
+    alignItems: 'center',
+    justifyContent: 'center',
   }, 
   })
